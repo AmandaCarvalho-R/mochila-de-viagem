@@ -4,7 +4,13 @@ const lista = document.getElementById("lista")
 form.addEventListener("submit", (evento) => {
     evento.preventDefault()
 
-criarElemento(evento.target.elements['nome'].value, evento.target.elements['quantidade'].value)
+    const nome = evento.target.elements['nome']
+    const quantidade = evento.target.elements['quantidade']
+
+criarElemento(nome.value, quantidade.value)
+
+    nome.value =""
+    quantidade.value =""
 
 })
 
