@@ -17,17 +17,26 @@ form.addEventListener("submit", (evento) => {
 //Verificar se o elemento já existe na minha lista.
     const existe = itens.find( elemento => elemento.nome === nome.value)
 
-    console.log(existe)
-
-       const itemAtual = {
+        const itemAtual = {
         "nome": nome.value,
         "quantidade": quantidade.value
-   }
 
-criarElemento(itemAtual)
+    }
+
+        if (existe) {
+            itemAtual.id = existe.id
+           
+           atualizaElemento(itemAtual) 
+        }else {
+            itemAtual.id = itens.length
+            criarElemento(itemAtual)
 
 
-        itens.push(itemAtual)
+              itens.push(itemAtual)
+        }
+   
+
+
         localStorage.setItem("itens", JSON.stringify(itens))
 
     nome.value =""
@@ -42,9 +51,14 @@ function criarElemento(item){
 
     const numeroItem = document.createElement('strong')
     numeroItem.innerHTML = item.quantidade
+    numeroItem.dataset.id = item.id
 
     novoItem.appendChild(numeroItem)
     novoItem.innerHTML += item.nome
 
     lista.appendChild(novoItem)
+}
+
+function atualizaElemento(item) {
+    document.querySelector("[data-id='"+item.id+"']").innerHTML = item.quantidade
 }
