@@ -2,7 +2,7 @@ const form = document.getElementById("novoItem")
 const lista = document.getElementById("lista")
 const itens = JSON.parse(localStorage.getItem("itens")) || []
 
-//Criado para que não suma os elementos da página ao ser atualizada.
+//Criado para que não suma os elementos da página ao ser atualizada. Buscando os dados do localStorage e criando os elementos
 
 itens.forEach( (elemento) => {
     criarElemento(elemento)
@@ -13,6 +13,11 @@ form.addEventListener("submit", (evento) => {
 
     const nome = evento.target.elements['nome']
     const quantidade = evento.target.elements['quantidade']
+
+//Verificar se o elemento já existe na minha lista.
+    const existe = itens.find( elemento => elemento.nome === nome.value)
+
+    console.log(existe)
 
        const itemAtual = {
         "nome": nome.value,
